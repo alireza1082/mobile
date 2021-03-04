@@ -22,6 +22,7 @@ public class CandleRequest {
     }
 
     public void getCandles(String symbol, Range range) {
+        String apiKey = "613FAD50-662F-4835-AEF4-220DD67904AA";
         String miniUrl;
         final String description;
         switch (range) {
@@ -48,7 +49,7 @@ public class CandleRequest {
         String url = urlBuilder.build().toString();
 
         final Request request = new Request.Builder().url(url)
-                .addHeader("X-CoinAPI-Key", "613FAD50-662F-4835-AEF4-220DD67904AA")
+                .addHeader("X-CoinAPI-Key", apiKey)
                 .build();
 
         okHttpClient.newCall(request).enqueue(new Callback() {
