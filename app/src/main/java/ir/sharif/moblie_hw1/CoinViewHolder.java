@@ -20,6 +20,10 @@ public class CoinViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
+    public void setCoin_Name(TextView coin_Name) {
+        this.coin_Name = coin_Name;
+    }
+
     public void setCoin_Image(ImageView coin_Image) {
         this.coin_Image = coin_Image;
     }
