@@ -6,14 +6,17 @@ import android.util.Log;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import okhttp3.*;
 
-public class CandleRequest {
-    private static final CandleRequest candleRequest = new CandleRequest();
+public class ApiRequest {
+    private static final ApiRequest apiRequest = new ApiRequest();
     private final OkHttpClient okHttpClient = new OkHttpClient();
+    private final String candleApiKey = "613FAD50-662F-4835-AEF4-220DD67904AA";
+    private final String cmcApiKey = "8dc04df1-b8e8-4ec4-9c62-76b0a2cb9ed2";
 
-    public static CandleRequest getCandleRequest() {
-        return candleRequest;
+    public static ApiRequest getApiRequest() {
+        return apiRequest;
     }
 
     public enum Range {
@@ -22,7 +25,6 @@ public class CandleRequest {
     }
 
     public void getCandles(String symbol, Range range) {
-        String apiKey = "613FAD50-662F-4835-AEF4-220DD67904AA";
         String miniUrl;
         final String description;
         switch (range) {
@@ -49,7 +51,7 @@ public class CandleRequest {
         String url = urlBuilder.build().toString();
 
         final Request request = new Request.Builder().url(url)
-                .addHeader("X-CoinAPI-Key", apiKey)
+                .addHeader("X-CoinAPI-Key", candleApiKey)
                 .build();
 
         okHttpClient.newCall(request).enqueue(new Callback() {
@@ -64,11 +66,37 @@ public class CandleRequest {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-                    //extractCandlesFromResponse(response.body().string(), description);
+                    //System.out.println(response.body().string());
                 }
             }
         });
+    }
 
+    public void getCoins(int limit) {
+        String url = HttpUrl.parse("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
+                .concat("?start=1").concat("&limit=").concat(Integer.toString(limit)).concat("&convert=USD"))
+                .newBuilder().build().toString();
+
+        final Request request = new Request.Builder().url(url)
+                .addHeader("X-CMC_PRO_API_KEY", cmcApiKey)
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                System.out.println(e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    //System.out.println(response.body().string());
+                }
+            }
+        });
     }
 
     private String getCurrentDate() {

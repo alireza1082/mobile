@@ -8,39 +8,43 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CoinViewHolder extends RecyclerView.ViewHolder {
-    private ImageView coin_Image;
-    private TextView coin_Name;
-    private TextView coin_Fee;
-    private TextView Hour;
-    private TextView day;
-    private TextView week;
-
+    private ImageView coinImage;
+    private TextView coinName;
+    private TextView coinShortName;
+    private TextView coinFee;
+    private TextView hourPriceChange;
+    private TextView dayPriceChange;
+    private TextView weekPriceChange;
 
     public CoinViewHolder(@NonNull View itemView) {
         super(itemView);
     }
 
-    public void setCoin_Name(TextView coin_Name) {
-        this.coin_Name = coin_Name;
+    public void setCoinImage(ImageView coinImage) {
+        this.coinImage = coinImage;
     }
 
-    public void setCoin_Image(ImageView coin_Image) {
-        this.coin_Image = coin_Image;
+    public void setCoinName(TextView coinName) {
+        this.coinName = coinName;
     }
 
-    public void setCoin_Fee(TextView coin_Fee) {
-        this.coin_Fee = coin_Fee;
+    public void setCoinShortName(TextView coinShortName) {
+        this.coinShortName = coinShortName;
     }
 
-    public void setHour(TextView hour) {
-        Hour = hour;
+    public void setCoinFee(TextView coinFee) {
+        this.coinFee = coinFee;
     }
 
-    public void setDay(TextView day) {
-        this.day = day;
+    public void setHourPriceChange(TextView hourPriceChange) {
+        this.hourPriceChange = hourPriceChange;
     }
 
-    public void setWeek(TextView week) {
-        this.week = week;
+    public void setDayPriceChange(TextView dayPriceChange) {
+        this.dayPriceChange = dayPriceChange;
+    }
+
+    public void setWeekPriceChange(TextView weekPriceChange) {
+        this.weekPriceChange = weekPriceChange;
     }
 }

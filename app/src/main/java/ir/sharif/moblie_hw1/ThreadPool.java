@@ -35,4 +35,8 @@ public class ThreadPool {
     public void execute(Runnable task) {
         threadPoolExecutor.execute(task);
     }
+
+    public void shutDown(){
+        threadPoolExecutor.shutdown();
+    }
 }
