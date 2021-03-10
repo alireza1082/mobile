@@ -1,5 +1,6 @@
 package ir.sharif.moblie_hw1;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import ir.sharif.moblie_hw1.Coin;
+import ir.sharif.moblie_hw1.CoinViewHolder;
+import ir.sharif.moblie_hw1.R;
 
 public class CoinAdapter extends RecyclerView.Adapter<CoinViewHolder> {
     private Context context;
