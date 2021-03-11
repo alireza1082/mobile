@@ -24,6 +24,16 @@ public class Coin {
         this.weekPriceChange = weekPriceChange;
     }
 
+    public Coin(ImageView coinImage, TextView coinName, TextView coinFee) {
+        this.coinImage = coinImage;
+        this.coinName = coinName;
+        this.coinFee = coinFee;
+/*        this.coinShortName = coinShortName;
+        this.hourPriceChange = hourPriceChange;
+        this.dayPriceChange = dayPriceChange;
+        this.weekPriceChange = weekPriceChange;*/
+    }
+
     public ImageView getCoinImage() {
         return coinImage;
     }
@@ -50,5 +60,13 @@ public class Coin {
 
     public TextView getWeekPriceChange() {
         return weekPriceChange;
+    }
+
+    @Override
+    public String toString() {
+        return "Coin{" +
+                "coinName=" + coinName +
+                ", coinFee=" + coinFee +
+                '}';
     }
 }

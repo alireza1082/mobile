@@ -26,6 +26,10 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinViewHolder> {
     private Context context;
     private ArrayList<Coin> coinList;
 
+    public CoinAdapter (ArrayList<Coin> list){
+        coinList = list;
+    }
+
     @NonNull
     @Override
     public CoinViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
