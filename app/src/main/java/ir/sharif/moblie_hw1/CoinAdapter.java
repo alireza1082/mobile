@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import androidx.annotation.NonNull;
@@ -18,16 +19,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import ir.sharif.moblie_hw1.Coin;
-import ir.sharif.moblie_hw1.CoinViewHolder;
-import ir.sharif.moblie_hw1.R;
-
 public class CoinAdapter extends RecyclerView.Adapter<CoinViewHolder> {
     private Context context;
     private ArrayList<Coin> coinList;
 
-    public CoinAdapter (ArrayList<Coin> list){
-        coinList = list;
+    public CoinAdapter() {
+        coinList = new ArrayList<Coin>();
     }
 
     @NonNull
@@ -75,18 +72,54 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinViewHolder> {
     }
 
     public void restoreFromCache() {
+        ThreadPool.getThreadPool().execute(() -> {
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                BufferedReader coins = new BufferedReader(new FileReader("coins/coins.txt"));
+                while (true) {
+                    String name = coins.readLine();
+                    if (name != null) {
+                        objectMapper.readValue(new File("coins/"
+                                + name + ".json"), Coin.class);
+                    } else break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public boolean isFirstUse() {
+        File coins = new File("coins/coins.txt");
+        return coins.length() == 0;
+    }
+
+    public void updateCoins(Boolean networkAvailable) {
+        if (networkAvailable) {
+            updateFromApi(10);
+        } else {
+            restoreFromCache();
+        }
+    }
+
+    private void updateFromApi(int limit) {
         ThreadPool.getThreadPool().execute(new Runnable() {
             @Override
             public void run() {
+                ApiRequest.getApiRequest().getCoins(10);
+                ObjectMapper objectMapper = new ObjectMapper();
                 try {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    BufferedReader coins = new BufferedReader(new FileReader("coins/coins.txt"));
-                    while (true) {
-                        String name = coins.readLine();
-                        if (name != null) {
-                            objectMapper.readValue(new File("coins/"
-                                    + name+ ".json"), Coin.class);
-                        } else break;
+                    JsonNode node = objectMapper.readValue(new File("api_response.json"), JsonNode.class);
+                    JsonNode data = node.get("data");
+                    for (int i = 0; i < limit; i++) {
+                        JsonNode coin = data.get(i);
+                        String name = coin.get("name").asText();
+                        String shortName = coin.get("symbol").asText();
+                        JsonNode usdDetail = coin.get("quote").get("USD");
+                        String fee = usdDetail.get("price").asText();
+                        String hourPriceChange = usdDetail.get("percent_change_1h").asText();
+                        String dayPriceChange = usdDetail.get("percent_change_24h").asText();
+                        String weekPriceChange = usdDetail.get("percent_change_7d").asText();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -3,6 +3,7 @@ package ir.sharif.moblie_hw1;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -93,7 +94,8 @@ public class ApiRequest {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-                    //System.out.println(response.body().string());
+                    FileWriter data = new FileWriter("api_response.json");
+                    data.write(response.body().string());
                 }
             }
         });
