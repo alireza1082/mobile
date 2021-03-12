@@ -23,8 +23,8 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinViewHolder> {
     private Context context;
     private ArrayList<Coin> coinList;
 
-    public CoinAdapter() {
-        coinList = new ArrayList<Coin>();
+    public CoinAdapter(ArrayList<Coin> coinList) {
+        coinList = this.coinList;
     }
 
     @NonNull

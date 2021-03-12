@@ -13,13 +13,15 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    ArrayList<Coin> coinList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = findViewById(R.id.RecyclerView);
-        CoinAdapter coinAdapter = new CoinAdapter();
+        CoinAdapter coinAdapter = new CoinAdapter(coinList);
         recyclerView.setAdapter(coinAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
