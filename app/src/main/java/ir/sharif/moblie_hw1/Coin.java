@@ -6,15 +6,15 @@ import android.widget.TextView;
 
 public class Coin {
     private ImageView coinImage;
-    private TextView coinName;
-    private TextView coinShortName;
-    private TextView coinFee;
-    private TextView hourPriceChange;
-    private TextView dayPriceChange;
-    private TextView weekPriceChange;
+    private String coinName;
+    private String coinShortName;
+    private String coinFee;
+    private String hourPriceChange;
+    private String dayPriceChange;
+    private String weekPriceChange;
 
-    public Coin(ImageView coinImage, TextView coinName, TextView coinShortName, TextView coinFee,
-                TextView hourPriceChange, TextView dayPriceChange, TextView weekPriceChange) {
+    public Coin(ImageView coinImage, String coinName, String coinShortName, String coinFee,
+                String hourPriceChange, String dayPriceChange, String weekPriceChange) {
         this.coinImage = coinImage;
         this.coinName = coinName;
         this.coinShortName = coinShortName;
@@ -24,11 +24,11 @@ public class Coin {
         this.weekPriceChange = weekPriceChange;
     }
 
-    public Coin(ImageView coinImage, TextView coinName, TextView coinFee) {
+    public Coin(ImageView coinImage, String coinName, String coinFee) {
         this.coinImage = coinImage;
         this.coinName = coinName;
         this.coinFee = coinFee;
-/*        this.coinShortName = coinShortName;
+/*      this.coinShortName = coinShortName;
         this.hourPriceChange = hourPriceChange;
         this.dayPriceChange = dayPriceChange;
         this.weekPriceChange = weekPriceChange;*/
@@ -38,27 +38,27 @@ public class Coin {
         return coinImage;
     }
 
-    public TextView getCoinName() {
+    public String getCoinName() {
         return coinName;
     }
 
-    public TextView getCoinShortName() {
+    public String getCoinShortName() {
         return coinShortName;
     }
 
-    public TextView getCoinFee() {
+    public String getCoinFee() {
         return coinFee;
     }
 
-    public TextView getHourPriceChange() {
+    public String getHourPriceChange() {
         return hourPriceChange;
     }
 
-    public TextView getDayPriceChange() {
+    public String getDayPriceChange() {
         return dayPriceChange;
     }
 
-    public TextView getWeekPriceChange() {
+    public String getWeekPriceChange() {
         return weekPriceChange;
     }
 
