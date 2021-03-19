@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">mobile_Hw1</string>
+    <string name="week_price_change">Week Price Change</string>
+    <string name="day_price_change">Day Price Change</string>
+    <string name="hour_price_change">Hour Price Change</string>
+    <string name="symbol">Symbol</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
 </resources>

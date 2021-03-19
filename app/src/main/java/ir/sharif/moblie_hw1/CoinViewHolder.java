@@ -18,6 +18,13 @@ public class CoinViewHolder extends RecyclerView.ViewHolder {
 
     public CoinViewHolder(@NonNull View itemView) {
         super(itemView);
+        coinImage = (ImageView) itemView.findViewById(R.id.coinImage);
+        coinName = (TextView) itemView.findViewById(R.id.coinName);
+        coinShortName = (TextView) itemView.findViewById(R.id.coinShortName);
+        coinFee = (TextView) itemView.findViewById(R.id.coinFee);
+        hourPriceChange = (TextView) itemView.findViewById(R.id.hourPriceChange);
+        dayPriceChange = (TextView) itemView.findViewById(R.id.dayPriceChange);
+        weekPriceChange = (TextView) itemView.findViewById(R.id.weekPriceChange);
     }
 
     public void setCoinImage(ImageView coinImage) {

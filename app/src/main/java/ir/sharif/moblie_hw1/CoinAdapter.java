@@ -31,7 +31,7 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinViewHolder> {
     @Override
     public CoinViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view =
-                LayoutInflater.from(context).inflate(R.layout.sample_coin, parent, false);
+                LayoutInflater.from(context).inflate(viewType, parent, false);
         return new CoinViewHolder(view);
     }
 
@@ -50,6 +50,11 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinViewHolder> {
     @Override
     public int getItemCount() {
         return coinList == null ? 0 : coinList.size();
+    }
+
+    @Override
+    public int getItemViewType(final int position) {
+        return R.layout.sample_coin;
     }
 
     public void cacheCoins() {
