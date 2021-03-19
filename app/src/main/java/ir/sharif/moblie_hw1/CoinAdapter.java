@@ -23,8 +23,8 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinViewHolder> {
     private Context context;
     private ArrayList<Coin> coinList;
 
-    public CoinAdapter(ArrayList<Coin> coinList) {
-        coinList = this.coinList;
+    public CoinAdapter() {
+        this.coinList = new ArrayList<Coin>();
     }
 
     @NonNull
@@ -103,27 +103,25 @@ public class CoinAdapter extends RecyclerView.Adapter<CoinViewHolder> {
     }
 
     private void updateFromApi(int limit) {
-        ThreadPool.getThreadPool().execute(new Runnable() {
-            @Override
-            public void run() {
-                ApiRequest.getApiRequest().getCoins(10);
-                ObjectMapper objectMapper = new ObjectMapper();
-                try {
-                    JsonNode node = objectMapper.readValue(new File("api_response.json"), JsonNode.class);
-                    JsonNode data = node.get("data");
-                    for (int i = 0; i < limit; i++) {
-                        JsonNode coin = data.get(i);
-                        String name = coin.get("name").asText();
-                        String shortName = coin.get("symbol").asText();
-                        JsonNode usdDetail = coin.get("quote").get("USD");
-                        String fee = usdDetail.get("price").asText();
-                        String hourPriceChange = usdDetail.get("percent_change_1h").asText();
-                        String dayPriceChange = usdDetail.get("percent_change_24h").asText();
-                        String weekPriceChange = usdDetail.get("percent_change_7d").asText();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+        ThreadPool.getThreadPool().execute(() -> {
+            ApiRequest.getApiRequest().getCoins(limit);
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                JsonNode node = objectMapper.readValue(new File("api_response.json"), JsonNode.class);
+                JsonNode data = node.get("data");
+                for (int i = 0; i < limit; i++) {
+                    JsonNode coin = data.get(i);
+                    String name = coin.get("name").asText();
+                    String shortName = coin.get("symbol").asText();
+                    JsonNode usdDetail = coin.get("quote").get("USD");
+                    String fee = usdDetail.get("price").asText();
+                    String hourPriceChange = usdDetail.get("percent_change_1h").asText();
+                    String dayPriceChange = usdDetail.get("percent_change_24h").asText();
+                    String weekPriceChange = usdDetail.get("percent_change_7d").asText();
+                    coinList.add(new Coin(null, name, shortName, fee, hourPriceChange, dayPriceChange, weekPriceChange));
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }

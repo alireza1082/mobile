@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CoinViewHolder extends RecyclerView.ViewHolder {
     private ImageView coinImage;
-    private String coinName;
-    private String coinShortName;
-    private String coinFee;
-    private String hourPriceChange;
-    private String dayPriceChange;
-    private String weekPriceChange;
+    private TextView coinName;
+    private TextView coinShortName;
+    private TextView coinFee;
+    private TextView hourPriceChange;
+    private TextView dayPriceChange;
+    private TextView weekPriceChange;
 
     public CoinViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -25,26 +25,26 @@ public class CoinViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setCoinName(String coinName) {
-        this.coinName = coinName;
+        this.coinName.setText(coinName);
     }
 
     public void setCoinShortName(String coinShortName) {
-        this.coinShortName = coinShortName;
+        this.coinShortName.setText(coinShortName);
     }
 
     public void setCoinFee(String coinFee) {
-        this.coinFee = coinFee;
+        this.coinFee.setText(coinFee);
     }
 
     public void setHourPriceChange(String hourPriceChange) {
-        this.hourPriceChange = hourPriceChange;
+        this.hourPriceChange.setText(hourPriceChange);
     }
 
     public void setDayPriceChange(String dayPriceChange) {
-        this.dayPriceChange = dayPriceChange;
+        this.dayPriceChange.setText(dayPriceChange);
     }
 
     public void setWeekPriceChange(String weekPriceChange) {
-        this.weekPriceChange = weekPriceChange;
+        this.weekPriceChange.setText(weekPriceChange);
     }
 }
